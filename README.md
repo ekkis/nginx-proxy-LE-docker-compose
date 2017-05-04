@@ -1,3 +1,5 @@
+### docker-compose for nginx proxy with LE
+
 Running nginx as a proxy with SSL support (via the free services of the Let's Encrypt project) on the Docker platform is possible using a combination of images and a docker-compose file
 This project makes the process very straightforward as follows:
 
