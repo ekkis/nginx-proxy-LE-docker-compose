@@ -44,6 +44,13 @@ Additionally, a subnet is specified in the network definition, which enables pro
 
 Finally, the `--opt` passed during network creation makes sure to name the real interface as well since Docker otherwise assigns a random `br-<random hex string>` name to it.  Naming the real interface facilitates fine-tuning the IP tables using the name
 
+#### Debugging
+
+To use the staging servers from Let's Encrypt (instead of production which rate limits), create a `.env` file in the same directory where the docker-compose is located with the contents below, like this:
+
+```bash 
+echo "ACME_CA_URI=https://acme-staging.api.letsencrypt.org/directory" >> .env
+```
 #### Components:
 
 For further information regarding the various components in this solution, please refer to each project:
