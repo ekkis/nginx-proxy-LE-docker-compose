@@ -69,22 +69,28 @@ in which case you'll need to fetch the template yourself and put it in the conta
 curl -O https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl
 ```
 
-then bring up LE:
+then bring up LE and watch the logs until it's done initialising (it will sleep when ready):
 
 ```bash
-docker-compose up -d nginx-letsencrypt
+docker-compose up -d nginx-ssl
+docker logs -f nginx-ssl
 ```
 
-and copy the file into that container:
+then copy the template into the container and restart the generator:
 
 ```bash
-docker cp nginx.tmpl nginx-letsencrypt:/etc/docker-gen/templates/
+docker cp nginx.tmpl nginx-ssl:/etc/docker-gen/templates/
+docker restart nginx-gen
 ```
 
-and now bring up docker-gen:
+To see it in action, start a container that uses the proxy and look at the certs generated:
 
 ```bash
-docker compose up -d nginx-gen
+docker exec -it nginx-ssl ls -R /etc/nginx/certs --color=none
 ```
 
+and the config generated:
 
+```bash
+docker exec -it nginx-proxy cat /etc/nginx/conf.d/default.conf
+```

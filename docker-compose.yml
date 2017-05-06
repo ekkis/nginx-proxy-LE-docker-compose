@@ -33,9 +33,9 @@ services:
     networks:
       - nginx-proxy
 
-  nginx-letsencrypt:
+  nginx-ssl:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: nginx-letsencrypt
+    container_name: nginx-ssl
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - nginx-conf:/etc/nginx/conf.d
