@@ -56,3 +56,35 @@ For further information regarding the various components in this solution, pleas
 * [The official NGINX image](https://github.com/nginxinc/docker-nginx)
 * [JWilder's docker-gen](https://github.com/jwilder/docker-gen)
 * [JrCs' docker-letsencrypt nginx-proxy companion ](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion)
+
+#### WARNING
+
+The current docker-compose file is structured to expect the docker-gen template to be provided by JrCs's companion package.  If [PR #203](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion/pull/203) is approved, everyting should work flawlessly.  If that PR is not approved, you'll likely get an error when `nginx-gen` tries to come up as follows:
+
+> 2017/05/06 03:09:20 Unable to parse template: open /etc/docker-gen/templates/nginx.tmpl: no such file or directory
+
+in which case you'll need to fetch the template yourself and put it in the container.  Grab this file:
+
+```bash
+curl -O https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl
+```
+
+then bring up LE:
+
+```bash
+docker-compose up -d nginx-letsencrypt
+```
+
+and copy the file into that container:
+
+```bash
+docker cp nginx.tmpl nginx-letsencrypt:/etc/docker-gen/templates/
+```
+
+and now bring up docker-gen:
+
+```bash
+docker compose up -d nginx-gen
+```
+
+
