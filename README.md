@@ -94,3 +94,7 @@ and the config generated:
 ```bash
 docker exec -it nginx-proxy cat /etc/nginx/conf.d/default.conf
 ```
+
+#### Other Resources
+
+If you use SaltStack, check out Lounagen's [writeup](https://github.com/lounagen/nginx-proxy-saltstack-network-creation)
