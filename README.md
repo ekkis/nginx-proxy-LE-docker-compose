@@ -79,7 +79,7 @@ docker logs -f nginx-ssl
 then copy the template into the container and restart the generator:
 
 ```bash
-docker cp nginx.tmpl nginx-ssl:/etc/docker-gen/templates/
+docker cp nginx.tmpl nginx-gen:/etc/docker-gen/templates/
 docker restart nginx-gen
 ```
 
